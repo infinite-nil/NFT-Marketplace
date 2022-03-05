@@ -122,6 +122,6 @@ contract NFTMarketplace is ReentrancyGuard {
             }
         }
 
-        return items
+        return items;
     }
 }
