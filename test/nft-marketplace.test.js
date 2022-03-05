@@ -13,8 +13,8 @@ describe("NFTMarketplace", function () {
     const listingPrice = (await marketplace.getItemsPrice()).toString();
     const auctionPrice = ethers.utils.parseUnits("100", "ether");
 
-    await nft.createToken("https://mytokenone.com");
-    await nft.createToken("https://mytokentwo.com");
+    await nft.createToken("mytokenone");
+    await nft.createToken("mytokentwo");
     await marketplace.createMarketplaceItem(
       nftContractAddress,
       1,
