@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { ethers } from "ethers";
-import { create as ipfsClient } from "ipfs-http-client";
 import Modal from "web3modal";
 
 import { CreateNFTForm } from "@/components";
 
+import { ipfsClient } from "@/services/ipfs";
+
 import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
 import Marketplace from "../../artifacts/contracts/NFTMarket.sol/NFTMarketplace.json";
 import { NFT_ADDRESS, NFT_MARKETPLACE_ADDRESS } from "../config";
-
-const client = ipfsClient("https://ipfs.infura.io:5001/api/v0");
 
 const CreateNFTs = () => {
   const router = useRouter();
@@ -21,20 +20,20 @@ const CreateNFTs = () => {
     description: "",
   });
 
-  function handleFieldChange(e) {
+  function handleFieldChange(event) {
     const { name } = event.target;
 
     setFormState((prev) => ({
       ...prev,
-      [name]: e.target.value,
+      [name]: event.target.value,
     }));
   }
 
-  async function handleFileChange(e) {
+  async function handleFileChange(event) {
     const [file] = event.target.files;
 
     try {
-      const added = await client.add(file);
+      const added = await ipfsClient.add(file);
       const URL = `https://ipfs.infura.io/ipfs/${added.path}`;
 
       setFileURL(URL);
@@ -53,7 +52,7 @@ const CreateNFTs = () => {
     });
 
     try {
-      const added = await client.add(data);
+      const added = await ipfsClient.add(data);
       const URL = `https:/ipfs.infura.io/ipfs/${added.path}`;
 
       createMarketplaceSale(URL);
