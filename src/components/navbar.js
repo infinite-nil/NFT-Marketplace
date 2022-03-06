@@ -1,8 +1,11 @@
+import { useRouter } from "next/router";
 import { Button, Grid, Link, Spacer } from "@geist-ui/react";
-import { User } from "@geist-ui/icons";
+import { User, Plus } from "@geist-ui/icons";
 import { Container } from "./container";
 
 const Navbar = () => {
+  const router = useRouter();
+
   return (
     <Container>
       <Grid.Container direction="row" justify="space-between">
@@ -11,9 +14,11 @@ const Navbar = () => {
         </Grid>
         <Grid padding={2}>
           <Grid.Container>
-            <Link href="/create-nft">Create NFT</Link>
+            <Button auto onClick={() => router.push('/create-nft')} icon={<Plus />}>
+              Create NFT
+            </Button>
             <Spacer w={3} />
-            <Button auto icon={<User />}>
+            <Button auto onClick={() => router.push('/')} icon={<User />}>
               My profile
             </Button>
           </Grid.Container>
