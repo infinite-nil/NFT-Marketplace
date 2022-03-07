@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
-import Modal from "web3modal";
+import { Grid } from "@geist-ui/react";
+
+import { NFTCard } from "@/components";
 
 import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
 import Marketplace from "../../artifacts/contracts/NFTMarket.sol/NFTMarketplace.json";
@@ -52,12 +54,24 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      {nfts.map((nft, i) => (
-        <pre key={i}>
-          <code>{JSON.stringify(nft, null, 2)}</code>
-        </pre>
+    <Grid.Container justify="center" alignItems="center">
+      {nfts.map(({ name, image, description, price }, i) => (
+        <Grid
+          key={i}
+          xs={24}
+          sm={12}
+          md={8}
+          margin="auto"
+          style={{ maxWidth: "300px" }}
+        >
+          <NFTCard
+            name={name}
+            description={description}
+            image={image}
+            price={price}
+          />
+        </Grid>
       ))}
-    </div>
+    </Grid.Container>
   );
 }

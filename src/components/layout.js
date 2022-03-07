@@ -1,4 +1,4 @@
-import { Page, Divider } from "@geist-ui/react";
+import { Divider, Grid } from "@geist-ui/react";
 import { Navbar } from "./navbar";
 import { Container } from "./container";
 
@@ -7,9 +7,9 @@ const Layout = ({ children }) => {
     <>
       <Navbar />
       <Divider />
-      <Page>
+      <Grid className="page">
         <Container>{children}</Container>
-      </Page>
+      </Grid>
     </>
   );
 };
